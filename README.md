@@ -68,7 +68,7 @@ sudo apt-get -y install telegraf jq bc
 
 sudo systemctl enable --now telegraf
 sudo systemctl is-enabled telegraf
-systemctl status telegraf
+sudo systemctl status telegraf
 
 # make the telegraf user sudo and adm to be able to execute scripts as sol user
 sudo adduser telegraf sudo
