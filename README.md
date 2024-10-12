@@ -79,7 +79,7 @@ sudo cp /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.orig
 sudo rm -rf /etc/telegraf/telegraf.conf
 
 # make sure you are the user you run solana with . eq. su - solana
-git clone https://github.com/stakeconomy/solanamonitoring/
+git clone https://github.com/pico-sol/solanamonitoring/
 cd solanamonitoring
 
 
