@@ -73,7 +73,7 @@ sudo systemctl status telegraf
 # make the telegraf user sudo and adm to be able to execute scripts as sol user
 sudo adduser telegraf sudo
 sudo adduser telegraf adm
-sudo -- bash -c 'echo "telegraf ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+sudo -- bash -c 'echo "_telegraf ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
 sudo cp /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.orig
 sudo rm -rf /etc/telegraf/telegraf.conf
