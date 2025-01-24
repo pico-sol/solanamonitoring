@@ -40,7 +40,7 @@ TBD
 * Optimize the way how we get skip-rate. 
 * Rebuild solana monitoring script as telegraf input plugin written in Go.
 
-# Installation & Setup
+# インストールと設定
 
 A fully functional Solana Validator is required to setup monitoring. In the example below we use Ubuntu 20.04.
 To get all metrics from your local Validator RPC.
@@ -84,18 +84,32 @@ cd solanamonitoring
 
 
 ```
-You might need to add your local RPC endpoint like "https://localhost:8899" and/or a timezone like "Europe / Amsterdam" to the monitor.sh script if you run into issues
 
+# monitor.shスクリプトのconfig部分のidentityPubkey, voteAccount, rpcURLを編集
+```
+#####    CONFIG    ##################################################################################################
+configDir="$HOME/.config/solana" # the directory for the config files, eg.: /home/user/.config/solana
+##### optional:        #
+identityPubkey="********************************************"      # identity pubkey for the validator, insert if autodiscovery fails
+voteAccount="********************************************"         # vote account address for the validator, specify if there are more than one or if autodiscovery fails
+additionalInfo="on"    # set to 'on' for additional general metrics like balance on your vote and identity accounts, number of validator nodes, epoch number and percentage epoch elapsed
+binDir=""              # auto detection of the solana binary directory can fail or an alternative custom installation is preferred, in case insert like $HOME/solana/target/release
+rpcURL="https://mainnet.helius-rpc.com/?api-key=****************************************"              # default is localhost with port number autodiscovered, alternatively it can be specified like http://custom.rpc.com:port
+format="SOL"           # amounts shown in 'SOL' instead of lamports
+now=$(date +%s%N)      # date in influx format
+timezone="UTC"            # time zone for epoch ends metric
+#####  END CONFIG  ##################################################################################################
+```
 
-# Example telegraf configuration
-Add the configuration file /etc/telegraf/telegraf.conf based on the example below:
+# telegraf 設定例
+設定ファイル /etc/telegraf/telegraf.conf を以下を参考に編集:
 
-Change your hostname, mountpoints to monitor, location of the monitor script and the username
+hostname, monitorのマウントポイントurl, monitorスクリプトの場所やusernameを編集
 
 ```
 # Global Agent Configuration
 [agent]
-  hostname = "picosol-mainnet" # set this to a name you want to identify your node in the grafana dashboard
+  hostname = "****-mainnet-*****" # set this to a name you want to identify your node in the grafana dashboard
   flush_interval = "15s"
   interval = "15s"
 
