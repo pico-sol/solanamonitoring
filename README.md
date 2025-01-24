@@ -85,7 +85,8 @@ cd solanamonitoring
 
 ```
 
-# monitor.shスクリプトのconfig部分のidentityPubkey, voteAccount, rpcURLを編集
+# monitor.shスクリプトの編集
+config部分のidentityPubkey, voteAccount, rpcURLを編集:
 ```
 #####    CONFIG    ##################################################################################################
 configDir="$HOME/.config/solana" # the directory for the config files, eg.: /home/user/.config/solana
