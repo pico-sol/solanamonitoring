@@ -10,11 +10,11 @@
 #####    CONFIG    ##################################################################################################
 configDir="$HOME/.config/solana" # the directory for the config files, eg.: /home/user/.config/solana
 ##### optional:        #
-identityPubkey=""      # identity pubkey for the validator, insert if autodiscovery fails
-voteAccount=""         # vote account address for the validator, specify if there are more than one or if autodiscovery fails
+identityPubkey="D3htsc6iRQJLqCNWcC2xcZgUuvcd1JT8zoYNqraNcTQz"      # identity pubkey for the validator, insert if autodiscovery fails
+voteAccount="3xjfK9C9YNcta8MvK1US4sQ3bc6DEjoJoR3qLExGf9xE"         # vote account address for the validator, specify if there are more than one or if autodiscovery fails
 additionalInfo="on"    # set to 'on' for additional general metrics like balance on your vote and identity accounts, number of validator nodes, epoch number and percentage epoch elapsed
 binDir=""              # auto detection of the solana binary directory can fail or an alternative custom installation is preferred, in case insert like $HOME/solana/target/release
-rpcURL=""              # default is localhost with port number autodiscovered, alternatively it can be specified like http://custom.rpc.com:port
+rpcURL="https://mainnet.helius-rpc.com/?api-key=1073c313-a222-481c-b35c-b900b73326ec"              # default is localhost with port number autodiscovered, alternatively it can be specified like http://custom.rpc.com:port
 format="SOL"           # amounts shown in 'SOL' instead of lamports
 now=$(date +%s%N)      # date in influx format
 timezone="UTC"            # time zone for epoch ends metric
@@ -109,7 +109,7 @@ if [ $(grep -c $voteAccount <<< $validatorCheck) == 0  ]; then echo "validator n
            epoch=$(jq -r '.epoch' <<<$epochInfo)
            tps=$(jq -r '.transactionCount' <<<$epochInfo)
            pctEpochElapsed=$(echo "scale=2 ; 100 * $(jq -r '.slotIndex' <<<$epochInfo) / $(jq -r '.slotsInEpoch' <<<$epochInfo)" | bc)
-           validatorCreditsCurrent=$($cli vote-account $voteAccount | grep credits/slots | cut -d ":" -f 2 | cut -d "/" -f 1 | awk 'NR==1{print $1}')
+           validatorCreditsCurrent=$($cli vote-account $voteAccount | grep credits/max | cut -d ":" -f 2 | cut -d "/" -f 1 | awk 'NR==1{print $1}')
            TIME=$($cli epoch-info | grep "Epoch Completed Time" | cut -d "(" -f 2 | awk '{print $1,$2,$3,$4}')
            VAR1=$(echo $TIME | grep -oE '[0-9]+day' | grep -o -E '[0-9]+')
            VAR2=$(echo $TIME | grep -oE '[0-9]+h'   | grep -o -E '[0-9]+')
