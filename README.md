@@ -45,7 +45,7 @@ TBD
 A fully functional Solana Validator is required to setup monitoring. In the example below we use Ubuntu 20.04.
 To get all metrics from your local Validator RPC.
 
-In the examples below we setup the validator with user "sol" with it's home in /home/sol. It is required that the script is installed and run under that same user.
+In the examples below we setup the validator with user "solv" with it's home in /home/solv. It is required that the script is installed and run under that same user.
 You need to install the telegraf agent on your validator nodes. 
 
 To have full statistics that include a whole epoch, make sure that your --limit-ledger-size configuration is big enough to store a whole epoch:
